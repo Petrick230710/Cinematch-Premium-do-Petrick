@@ -1,4 +1,6 @@
 
+
+
 let campoIdade, campoFantasia, campoAventura, campoAnimacao, campoDrama, campoComedia;
 let ultimaRecomendacao = "";
 let filmesRecomendados = [];
@@ -191,4 +193,3 @@ function sample(arr) {
 function random(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
-
