@@ -1,6 +1,7 @@
 
 
 
+
 let campoIdade, campoFantasia, campoAventura, campoAnimacao, campoDrama, campoComedia;
 let ultimaRecomendacao = "";
 let filmesRecomendados = [];
