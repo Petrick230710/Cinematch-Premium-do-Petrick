@@ -4,7 +4,10 @@ let filmesRecomendados = [];
 let bgColor;
 let imgFundo;
 
-
+function preload() {
+  // Carrega uma imagem de fundo de cinema (substitua pela URL da sua imagem)
+  imgFundo = loadImage("https://www.google.com/url?sa=i&url=https%3A%2F%2Frushvideo.com.br%2Fexplorando-a-diversidade-de-experiencias-uma-introducao-aos-diferentes-tipos-de-salas-de-cinema%2F&psig=AOvVaw3UnR2f5_mcqrUZ_uiERkH1&ust=1754175741832000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJj_lYLc6o4DFQAAAAAdAAAAABAE");
+}
 
 function setup() {
   createCanvas(1000, 700);
@@ -13,12 +16,12 @@ function setup() {
   
   // Cabeçalho premium
   let header = createElement("h1", "🎬 Cinematch Premium do Petrick");
-  header.position(60, 20);
+  header.position(40, 10);
   header.style('color', '#FFD700');
   header.style('font-size', '32px');
   header.style('text-shadow', '2px 2px 4px #000000');
   
-  // Formulário premium - Moved age input higher
+  // Formulário premium
   createP("📌 Sua idade:").position(40, 60).style('color', '#FFFFFF').style('font-size', '18px');
   campoIdade = createInput("10", 'number');
   campoIdade.position(60, 110).size(120).style('font-size', '16px').style('padding', '8px');
@@ -32,7 +35,7 @@ function setup() {
   
   // Botão premium
   let botao = createButton("🎞️ Gerar Recomendação Especial");
-  botao.position(20, yPos);
+  botao.position(60, yPos);
   botao.mousePressed(gerarNovaRecomendacao);
   botao.style('background', 'linear-gradient(to right, #6a11cb 0%, #2575fc 100%)');
   botao.style('color', '#FFFFFF');
@@ -42,11 +45,11 @@ function setup() {
   botao.style('font-size', '16px');
   botao.style('cursor', 'pointer');
   
-  // Área de histórico - Moved higher (reduced gap from button)
-  createP("📋 Histórico de recomendações:").position(60, yPos + 50).style('color', '#FFFFFF').style('font-size', '18px');
+  // Área de histórico
+  createP("📋 Histórico de recomendações:").position(30, yPos + 30).style('color', '#FFFFFF').style('font-size', '18px');
   
   // Footer
-  createP(" 2025 Cinematch Premium do petrick - Todos os direitos reservados")
+  createP("© 2025 Cinematch Premium do Petrick - Todos os direitos reservados")
     .position(width/2 - 180, height - 30)
     .style('color', '#AAAAAA')
     .style('font-size', '12px');
@@ -62,9 +65,9 @@ function criarCheckboxEstilizado(rotulo, x, y) {
 }
 
 function draw() {
-  // Fundo com overlay escuro
+  // Fundo com imagem de cinema e overlay escuro
   image(imgFundo, 0, 0, width, height);
-  fill(0, 0, 0, 180);
+  fill(0, 0, 0, 180); // Overlay escuro para melhor legibilidade
   rect(0, 0, width, height);
   
   // Exibe a recomendação atual com destaque
@@ -72,18 +75,18 @@ function draw() {
   textAlign(CENTER, CENTER);
   textSize(36);
   textStyle(BOLD);
-  text(ultimaRecomendacao, width / 2, 120);
-  
-  // Caixa de histórico - Adjusted position to be higher
+  text(ultimaRecomendacao, width / 2, 80);
+'https://i.imgur.com/J5QERyL.jpg'  
+  // Caixa de histórico
   fill(10, 10, 30, 200);
-  rect(50, 350, 400, 250, 15);  // Changed y-position from 400 to 350
+  rect(50, 400, 400, 250, 15);
   
   // Exibe o histórico com estilo
   fill(255);
   textAlign(LEFT, TOP);
   textSize(16);
   textStyle(NORMAL);
-  let y = 370;  // Changed from 420 to 370
+  let y = 420;
   for (let i = filmesRecomendados.length - 1; i >= Math.max(0, filmesRecomendados.length - 8); i--) {
     text("🎥 " + filmesRecomendados[i], 70, y);
     y += 30;
@@ -95,6 +98,7 @@ function draw() {
   text(`Total de recomendações: ${filmesRecomendados.length}`, width - 60, height - 60);
 }
 
+// Restante do código permanece igual...
 function gerarNovaRecomendacao() {
   let idade = parseInt(campoIdade.value()) || 10;
   let preferencias = {
@@ -170,10 +174,10 @@ function geraRecomendacao(idade, pref) {
   // Se nenhuma categoria foi selecionada, usa 'geral'
   if (categoriasPrioritarias.length === 0) categoriasPrioritarias = ['geral'];
   
-  // Seleciona aleatoriamente uma categoria prioritária
+  // Seleciona al'https://i.imgur.com/J5QERyL.jpg'eatoriamente uma categoria prioritária
   let categoria = random(categoriasPrioritarias);
   
-  // Garante que a categoria existe para a faixa etária
+  // Garante que'https://i.imgur.com/J5QERyL.jpg' a categoria existe para a faixa etária
   if (!catalogo[faixaEtaria][categoria]) {
     categoria = 'geral';
   }
