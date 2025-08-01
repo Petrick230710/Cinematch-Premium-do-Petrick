@@ -4,10 +4,6 @@ let filmesRecomendados = [];
 let bgColor;
 let imgFundo;
 
-function preload() {
-  // Carrega uma imagem de fundo de cinema (substitua pela URL da sua imagem)
-  imgFundo = loadImage("https://www.google.com/url?sa=i&url=https%3A%2F%2Frushvideo.com.br%2Fexplorando-a-diversidade-de-experiencias-uma-introducao-aos-diferentes-tipos-de-salas-de-cinema%2F&psig=AOvVaw3UnR2f5_mcqrUZ_uiERkH1&ust=1754175741832000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCJj_lYLc6o4DFQAAAAAdAAAAABAE");
-}
 
 function setup() {
   createCanvas(1000, 700);
