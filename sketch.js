@@ -1,15 +1,10 @@
-
-
-
 let campoIdade, campoFantasia, campoAventura, campoAnimacao, campoDrama, campoComedia;
 let ultimaRecomendacao = "";
 let filmesRecomendados = [];
 let bgColor;
 let imgFundo;
 
-function preload() {
-  imgFundo = loadImage('https://i.imgur.com/J5QERyL.jpg');
-}
+
 
 function setup() {
   createCanvas(1000, 700);
@@ -23,12 +18,12 @@ function setup() {
   header.style('font-size', '32px');
   header.style('text-shadow', '2px 2px 4px #000000');
   
-  // Formulário premium
-  createP("📌 Sua idade:").position(60, 90).style('color', '#FFFFFF').style('font-size', '18px');
+  // Formulário premium - Moved age input higher
+  createP("📌 Sua idade:").position(40, 60).style('color', '#FFFFFF').style('font-size', '18px');
   campoIdade = createInput("10", 'number');
-  campoIdade.position(60, 120).size(120).style('font-size', '16px').style('padding', '8px');
+  campoIdade.position(60, 110).size(120).style('font-size', '16px').style('padding', '8px');
   
-  let yPos = 160;
+  let yPos = 150;
   campoFantasia = criarCheckboxEstilizado(" Gosta de fantasia?", 60, yPos); yPos += 40;
   campoAventura = criarCheckboxEstilizado(" Gosta de aventura?", 60, yPos); yPos += 40;
   campoAnimacao = criarCheckboxEstilizado(" Prefere animação?", 60, yPos); yPos += 40;
@@ -37,7 +32,7 @@ function setup() {
   
   // Botão premium
   let botao = createButton("🎞️ Gerar Recomendação Especial");
-  botao.position(60, yPos);
+  botao.position(20, yPos);
   botao.mousePressed(gerarNovaRecomendacao);
   botao.style('background', 'linear-gradient(to right, #6a11cb 0%, #2575fc 100%)');
   botao.style('color', '#FFFFFF');
@@ -47,8 +42,8 @@ function setup() {
   botao.style('font-size', '16px');
   botao.style('cursor', 'pointer');
   
-  // Área de histórico
-  createP("📋 Histórico de recomendações:").position(60, yPos + 60).style('color', '#FFFFFF').style('font-size', '18px');
+  // Área de histórico - Moved higher (reduced gap from button)
+  createP("📋 Histórico de recomendações:").position(60, yPos + 50).style('color', '#FFFFFF').style('font-size', '18px');
   
   // Footer
   createP(" 2025 Cinematch Premium do petrick - Todos os direitos reservados")
@@ -79,16 +74,16 @@ function draw() {
   textStyle(BOLD);
   text(ultimaRecomendacao, width / 2, 120);
   
-  // Caixa de histórico
+  // Caixa de histórico - Adjusted position to be higher
   fill(10, 10, 30, 200);
-  rect(50, 400, 400, 250, 15);
+  rect(50, 350, 400, 250, 15);  // Changed y-position from 400 to 350
   
   // Exibe o histórico com estilo
   fill(255);
   textAlign(LEFT, TOP);
   textSize(16);
   textStyle(NORMAL);
-  let y = 420;
+  let y = 370;  // Changed from 420 to 370
   for (let i = filmesRecomendados.length - 1; i >= Math.max(0, filmesRecomendados.length - 8); i--) {
     text("🎥 " + filmesRecomendados[i], 70, y);
     y += 30;
