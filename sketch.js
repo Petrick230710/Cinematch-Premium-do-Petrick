@@ -42,13 +42,7 @@ function setup() {
   botao.style('cursor', 'pointer');
   
   // Área de histórico
-  createP("📋 Histórico de recomendações:").position(30, yPos + 30).style('color', '#FFFFFF').style('font-size', '18px');
-  
-  // Footer
-  createP("© 2025 Cinematch Premium do Petrick - Todos os direitos reservados")
-    .position(width/2 - 180, height - 30)
-    .style('color', '#AAAAAA')
-    .style('font-size', '12px');
+  createP("📋 Histórico de recomendações:").position(120, yPos + 290).style('color', '#FFFFFF').style('font-size', '18px');
 }
 
 function criarCheckboxEstilizado(rotulo, x, y) {
@@ -62,17 +56,21 @@ function criarCheckboxEstilizado(rotulo, x, y) {
 
 function draw() {
   // Fundo com imagem de cinema e overlay escuro
-  image(imgFundo, 0, 0, width, height);
+  if (imgFundo) {
+    image(imgFundo, 0, 0, width, height);
+  }
   fill(0, 0, 0, 180); // Overlay escuro para melhor legibilidade
   rect(0, 0, width, height);
   
   // Exibe a recomendação atual com destaque
-  fill(color(255, 215, 0));
-  textAlign(CENTER, CENTER);
-  textSize(36);
-  textStyle(BOLD);
-  text(ultimaRecomendacao, width / 2, 80);
-'https://i.imgur.com/J5QERyL.jpg'  
+  if (ultimaRecomendacao) {
+    fill(color(255, 215, 0));
+    textAlign(CENTER, CENTER);
+    textSize(36);
+    textStyle(BOLD);
+    text(ultimaRecomendacao, width / 2, 80);
+  }
+  
   // Caixa de histórico
   fill(10, 10, 30, 200);
   rect(50, 400, 400, 250, 15);
@@ -94,7 +92,6 @@ function draw() {
   text(`Total de recomendações: ${filmesRecomendados.length}`, width - 60, height - 60);
 }
 
-// Restante do código permanece igual...
 function gerarNovaRecomendacao() {
   let idade = parseInt(campoIdade.value()) || 10;
   let preferencias = {
@@ -108,7 +105,7 @@ function gerarNovaRecomendacao() {
   ultimaRecomendacao = geraRecomendacao(idade, preferencias);
   
   // Adiciona ao histórico (limita a 20 itens)
-  if (filmesRecomendados.length === 0 || filmesRecomendados[filmesRecomendados.length - 1] !== ultimaRecomendacao) {
+  if (ultimaRecomendacao && (filmesRecomendados.length === 0 || filmesRecomendados[filmesRecomendados.length - 1] !== ultimaRecomendacao)) {
     filmesRecomendados.push(ultimaRecomendacao);
     if (filmesRecomendados.length > 20) {
       filmesRecomendados.shift();
@@ -170,21 +167,15 @@ function geraRecomendacao(idade, pref) {
   // Se nenhuma categoria foi selecionada, usa 'geral'
   if (categoriasPrioritarias.length === 0) categoriasPrioritarias = ['geral'];
   
-  // Seleciona al'https://i.imgur.com/J5QERyL.jpg'eatoriamente uma categoria prioritária
+  // Seleciona aleatoriamente uma categoria prioritária
   let categoria = random(categoriasPrioritarias);
   
-  // Garante que'https://i.imgur.com/J5QERyL.jpg' a categoria existe para a faixa etária
+  // Garante que a categoria existe para a faixa etária
   if (!catalogo[faixaEtaria][categoria]) {
     categoria = 'geral';
   }
   
-  return sample(catalogo[faixaEtaria][categoria]);
-}
-
-function sample(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function random(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
+  // Seleciona um filme aleatório da categoria
+  const filmes = catalogo[faixaEtaria][categoria];
+  return filmes[Math.floor(Math.random() * filmes.length)];
 }
